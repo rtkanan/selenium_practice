@@ -10,7 +10,21 @@ def setUp():
 
 # Define the fixture scope to each module rather than each function.
 @pytest.fixture(scope="module")
-def msetUp():
+def msetUp(browser, ostype):
+    print("Browser: ", browser)
+    print("Operating System: ", ostype)
     print("Execute before each module")
     yield 
     print("Execute after each module")
+
+def pytest_addoption(parser):
+    parser.addoption("--browser")
+    parser.addoption("--ostype", help="Type of Operating System")
+
+@pytest.fixture(scope="session")
+def browser(request):
+    return request.config.getoption("--browser")
+    
+@pytest.fixture(scope="session")
+def ostype(request):
+    return request.config.getoption("--ostype")
