@@ -5,8 +5,8 @@ class TestClassDemo():
 
     @pytest.fixture(autouse=True) 
     # This enables to use the variable defined in the method to be accessible in the other methods of the class.
-    def classSetup(self):
-        self.var = 10
+    def classSetup(self, msetUp):
+        self.var = self.value
     
     def test_one(self):
         result = self.var + 5

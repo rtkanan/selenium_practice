@@ -9,12 +9,19 @@ def setUp():
     print("Execute after each test case")
 
 # Define the fixture scope to each module rather than each function.
-@pytest.fixture(scope="module")
-def msetUp(browser, ostype):
+@pytest.fixture(scope="class")
+def msetUp(request, browser, ostype):
     print("Browser: ", browser)
     print("Operating System: ", ostype)
+    if (browser == 'firefox'):
+        value = 10
+    else:
+        value = 20
+    
+    if request.cls is not None:
+        request.cls.value = value
     print("Execute before each module")
-    yield 
+    yield
     print("Execute after each module")
 
 def pytest_addoption(parser):
