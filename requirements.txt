@@ -2,3 +2,4 @@ pylint
 selenium
 pytest
 pytest-ordering
+pytest-html
